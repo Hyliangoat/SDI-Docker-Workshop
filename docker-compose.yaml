@@ -11,6 +11,8 @@ services:
       - "8081:8081"
     volumes:
       - ./api:/app
+    depends_on:
+      - db
 
   db:
     image: postgres:latest
@@ -22,7 +24,7 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql
 
 volumes:
  postgres_data:
