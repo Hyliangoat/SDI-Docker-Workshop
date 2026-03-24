@@ -3,7 +3,23 @@ services:
     build: ui/src
     ports:
       - "3000:3000"
+    volumes:
+      - ./ui/src:/app
   backend:
     build: api
     ports:
-      - "8080:8080"
+      - "8081:8081"
+    volumes:
+      - ./api:/app
+
+  db:
+    image: postgres:latest
+    container_name: db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: docker
+      POSTGRES_DB: cats
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./api:/var/lib/postgresql/
